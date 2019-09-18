@@ -10,8 +10,8 @@ change input txt file</br>
 go to call.hangman.php</br>
 $fp=fopen('hangwords.txt', 'r');</br>
 
-example</br>
-https://localhost/sand/hangman/csc231/a3.php</br>
+example demo</br>
+https://thekingofbandit.tilde.team/hangman/csc231/a3.php</br>
 
 sources:
 https://teamtreehouse.com/library/reading-files-into-a-string-or-array</br>
