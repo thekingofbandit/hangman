@@ -31,13 +31,27 @@ class Hangman
 	//the number of guesses the user made
 	var $iGuesses;
 	
+	
 	//initialize the game variables
 	
 	function Hangman()
 	{
 		//chose a random word from the $words array
-		$words = array( "apple", "banana", "orange", "papaya", "mango" );
-		//$words = fetchWordArray($WORDLISTFILE);
+		$words=array();
+		$fp=fopen('hangwords.txt', 'r');
+		while (!feof($fp))
+		{
+    	$line=fgets($fp);
+
+    	//process line however you like
+    	$line=trim($line);
+
+    	//add to array
+    	$words[]=$line;
+
+		}
+		fclose($fp);
+		
 		$this->sWord = $words[ rand( 0, sizeof( $words ) ) ];
 		
 		//define the word's length

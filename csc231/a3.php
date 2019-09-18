@@ -1,7 +1,7 @@
 <?php
 require_once( "class.hangman.php" );
-print( "<h3>Hangman</h3>" );
-print( "Hangman  <b>Khanafi</b><br /><hr />" );
+print( "<div class='container'><div class='p-3 mb-2 bg-warning text-dark'>HANGMAN</div>" );
+print( "Hangman  by <b>Khanafi</b><br /><hr />" );
 print( "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>" );
 session_start();
 
@@ -29,25 +29,25 @@ if( isset( $_POST[ "submit" ] ) )
 	}
 }
 
-print( "Current word: " );
+print( "Current word: <span class='text-success'> " );
 $oGame->printWord();
-print( "<br /><hr />" );
+print( "</span><br /><hr />" );
 
 if( $oGame->iStatus != 0 )
 {
-	print( "Current status: <img src='" . $oGame->getStatus() . "' />" );
+	print( "Current status: <img src='" . $oGame->getStatus() . "' class='img-fluid' alt='Responsive image' />" );
 	print( "<br /><hr />" );
 }
 
 if( sizeof( $oGame->aTriedLetters ) != 0 )
 {
-	print( "Tried letters: " );
+	print( "Tried letters: <span class='text-danger'> " );
 	for( $i = 0; $i < sizeof( $oGame->aTriedLetters ); $i++ )
 	{
 		print( $oGame->aTriedLetters[ current( $oGame->aTriedLetters ) ] . ", " );
 		next( $oGame->aTriedLetters );
 	}
-	print( "<br /><hr />" );
+	print( "</span><br /><hr />" );
 }
 
 if( $oGame->checkDead() )
@@ -88,4 +88,4 @@ print( "<br />" );
 print( "Guess word: <input type='text' name='word' class='input-group-text'/><br />" );
 print( "<input type='submit' name='submit' value='Guess'  class='btn btn-primary'/>&nbsp;" );
 print( "<input type='submit' name='new' value='New game'  class='btn btn-primary'/>" );
-print( "</form>" );
+print( "</form></div>" );
