@@ -64,9 +64,9 @@ class Hangman
 		}
 		
 		//fill the array with the status images, located in the 'images' folder
-		for( $i = 1; $i <= 11; $i++ )
+		for( $i = 1; $i <= 25; $i++ )
 		{
-			$this->aImages[ $i ] = "images/$i.jpeg";
+			$this->aImages[ $i ] = "images/$i.png";
 		}
 		
 		//other variables
@@ -136,7 +136,7 @@ class Hangman
 	//check if the user is dead
 	function checkDead()
 	{
-		if( $this->iStatus == 11 )
+		if( $this->iStatus == 25 )
 		{
 			return true;
 		} else {

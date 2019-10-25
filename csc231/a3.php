@@ -29,51 +29,11 @@ if( isset( $_POST[ "submit" ] ) )
 	}
 }
 
-print( "Current word: <span class='text-success'> " );
-$oGame->printWord();
-print( "</span><br /><hr />" );
-
-if( $oGame->iStatus != 0 )
-{
-	print( "Current status: <img src='" . $oGame->getStatus() . "' class='img-fluid' alt='Responsive image' />" );
-	print( "<br /><hr />" );
-}
-
-if( sizeof( $oGame->aTriedLetters ) != 0 )
-{
-	print( "Tried letters: <span class='text-danger'> " );
-	for( $i = 0; $i < sizeof( $oGame->aTriedLetters ); $i++ )
-	{
-		print( $oGame->aTriedLetters[ current( $oGame->aTriedLetters ) ] . ", " );
-		next( $oGame->aTriedLetters );
-	}
-	print( "</span><br /><hr />" );
-}
-
-if( $oGame->checkDead() )
-{
-	session_destroy();
-	print( "<h3>You lost!</h3>" );
-	print( "The word was '" . $oGame->sWord . "'<br />" );
-	print( "<a href='a3.php'>Play again</a>" );
-	exit();
-}
-
-if( $oGame->wordGuessed() )
-{
-	session_destroy();
-	print( "<h3>You won!</h3>" );
-	print( "You guessed the word '" . $oGame->sWord . "' " );
-	print( "in <b>" . $oGame->iGuesses . "</b> guesses<br />" );
-	print( "<a href='a3.php' class='btn btn-primary'>Play again</a>" );
-	exit();
-}
-
 $_SESSION[ "hangman" ] = $oGame;
 
-print( "<form method='POST' action='a3.php'>" );
+print( "<div class='row'><div class='col-md-6'><form method='POST' action='a3.php'>" );
 print( "Guess letter: " );
-print( "<select name='guess' class='form-control col-1'>" );
+print( "<select name='guess' class='form-control col-md-6'>" );
 for( $i = 97; $i < 123; $i++ )
 {
 	if( array_key_exists( chr( $i ), $oGame->aTriedLetters ) )
@@ -85,7 +45,49 @@ for( $i = 97; $i < 123; $i++ )
 }
 print( "</select>" );
 print( "<br />" );
-print( "Guess word: <input type='text' name='word' class='input-group-text'/><br />" );
+print( "Guess word: <input type='text' name='word' class='input-group-text col-md-6'/><br />" );
 print( "<input type='submit' name='submit' value='Guess'  class='btn btn-primary'/>&nbsp;" );
-print( "<input type='submit' name='new' value='New game'  class='btn btn-primary'/>" );
-print( "</form></div>" );
+print( "<input type='submit' name='new' value='New game'  class='btn btn-secondary'/>" );
+print( "</form>" );
+
+print( "Current word: <span class='text-success'> " );
+$oGame->printWord();
+print( "</span><br /><hr />" );
+if( sizeof( $oGame->aTriedLetters ) != 0 )
+{
+	print( "Tried letters: <span class='text-danger'> " );
+	for( $i = 0; $i < sizeof( $oGame->aTriedLetters ); $i++ )
+	{
+		print( $oGame->aTriedLetters[ current( $oGame->aTriedLetters ) ] . ", " );
+		next( $oGame->aTriedLetters );
+	}
+	print( "</span><br /><hr /></div>" );
+}
+if( $oGame->checkDead() )
+{
+	session_destroy();
+	print( "<div class='row'><h3>You lost! <img src='./images/happy.png' class='img-fluid' alt='Responsive image' /></h3>" );
+	print( "<div class='col-md-6'>the word was '" . $oGame->sWord . "'<br /></div>" );
+	print( "<div class='col-md-6'><a class='btn btn-primary' href='a3.php'>Play again</a></div></div>" );
+	exit();
+}
+
+if( $oGame->wordGuessed() )
+{
+	session_destroy();
+	print( "<div class='row'><h3>You won!</h3> <img src=./images/happy.png>" );
+	print( "You guessed the word '" . $oGame->sWord . "' " );
+	print( "<div class='col-md-6'>in <b>" . $oGame->iGuesses . "</b> guesses</div>" );
+	print( "<div class='col-md-6'><a href='a3.php' class='btn btn-primary'>Play again</a></div></div>" );
+	exit();
+}
+
+
+if( $oGame->iStatus != 0 )
+{
+	print( "<div class='col-md-6'> Current status: <img src='" . $oGame->getStatus() . "' class='img-fluid' alt='Responsive image' /></div></div>" );
+	print( "<br /><hr /></div>" );
+}
+
+
+
